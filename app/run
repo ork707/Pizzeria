@@ -1,0 +1,17 @@
+uvicorn app.main:app --reload
+
+mkdir -p app/models
+touch app/models/__init__.py
+
+mkdir -p app/schemas
+nano app/schemas/pizza.py
+
+ls app
+
+nano app/database.py
+
+nano app/models/pizza.py
+
+Ctrl + O
+Enter
+Ctrl + X
