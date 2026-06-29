@@ -8,6 +8,9 @@ from app.schemas.user import UserCreate
 from fastapi import HTTPException
 from app.security import hash_password
 from app.security import verify_password
+from app.auth import create_access_token
+from fastapi import Header
+from app.auth import verify_token
 
 router = APIRouter()
 
@@ -87,7 +90,43 @@ def login(
             detail="Invalid username or password"
         )
 
+    token = create_access_token(
+    {"sub": user.username}
+    )
+
     return {
-        "message": "Login successful",
-        "user_id": user.id
-    }
+    "access_token": token,
+    "token_type": "bearer"
+    } 
+
+
+@router.get("/me")
+def get_me(
+    authorization: str = Header(...),
+    db: Session = Depends(get_db)
+):
+    token = authorization.replace("Bearer ", "")
+
+    username = verify_token(token)
+
+    if username is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token"
+        )
+
+    user = db.query(User).filter(
+        User.username == username
+    ).first()
+
+    if user is None:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    return {
+        "id": user.id,
+        "username": user.username,
+        "email": user.email
+    }   
