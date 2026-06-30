@@ -11,8 +11,10 @@ from app.security import verify_password
 from app.auth import create_access_token
 from fastapi import Header
 from app.auth import verify_token
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 router = APIRouter()
+security = HTTPBearer()
 
 def get_db():
     db = SessionLocal()
@@ -102,10 +104,11 @@ def login(
 
 @router.get("/me")
 def get_me(
-    authorization: str = Header(...),
+    
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ):
-    token = authorization.replace("Bearer ", "")
+    token = credentials.credentials
 
     username = verify_token(token)
 
