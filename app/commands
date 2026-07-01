@@ -1,3 +1,7 @@
 uvicorn app.main:app --reload
 
 rm pizzeria.db
+
+
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsImV4cCI6MTc4MjgyODg2N30.84leIHyJ8BZOF8nDKhskIcg7RARoSJdxbB3dqkmYr_o",
+  "token_type": "bearer"
