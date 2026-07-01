@@ -5,3 +5,14 @@ rm pizzeria.db
 
   "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsImV4cCI6MTc4MjgyODg2N30.84leIHyJ8BZOF8nDKhskIcg7RARoSJdxbB3dqkmYr_o",
   "token_type": "bearer"
+
+
+  {
+  "username": "alice",
+  "password": "secret123"
+}
+
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsImV4cCI6MTc4MjkxMzU1OH0.XgAf-dzA9RJWHk-SUMbLn2Quyu40sV-vyUkdxIk2la4",
+  "token_type": "bearer"
+}

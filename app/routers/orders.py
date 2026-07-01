@@ -60,3 +60,39 @@ def create_order(
     db.refresh(new_order)
 
     return new_order
+
+
+@router.get("/my-orders")
+def get_my_orders(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: Session = Depends(get_db)
+):
+    token = credentials.credentials
+
+    username = verify_token(token)
+    print("Username from token:", username)
+
+    if username is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token"
+        )
+
+    user = db.query(User).filter(
+        User.username == username
+    ).first()
+
+
+    print("User from database:", user)
+
+    if user is None:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    orders = db.query(Order).filter(
+        Order.user_id == user.id
+    ).all()
+
+    return orders

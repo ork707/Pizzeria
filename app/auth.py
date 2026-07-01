@@ -21,6 +21,7 @@ def create_access_token(data: dict):
         algorithm=ALGORITHM
     )
 
+
 def verify_token(token: str):
     try:
         payload = jwt.decode(
@@ -29,12 +30,13 @@ def verify_token(token: str):
             algorithms=[ALGORITHM]
         )
 
-        username = payload.get("sub")
+        print("Payload:", payload)
 
-        if username is None:
-            return None
+        username = payload.get("sub")
+        print("Username:", username)
 
         return username
 
-    except JWTError:
+    except JWTError as e:
+        print("JWT Error:", e)
         return None
