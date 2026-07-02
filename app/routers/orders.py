@@ -7,6 +7,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from app.auth import verify_token
 from app.models.user import User
 from fastapi import HTTPException
+from sqlalchemy.orm import joinedload
 
 router = APIRouter()
 
@@ -62,7 +63,7 @@ def create_order(
     return new_order
 
 
-@router.get("/my-orders")
+@router.get("/my-orders", response_model=list[OrderResponse])
 def get_my_orders(
     credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
@@ -91,8 +92,11 @@ def get_my_orders(
             detail="User not found"
         )
 
-    orders = db.query(Order).filter(
-        Order.user_id == user.id
-    ).all()
+    orders = (
+    db.query(Order)
+    .options(joinedload(Order.pizza))
+    .filter(Order.user_id == user.id)
+    .all()
+)
 
     return orders

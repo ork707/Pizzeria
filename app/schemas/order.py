@@ -1,12 +1,6 @@
 from pydantic import BaseModel
+from app.schemas.pizza import PizzaResponse
 
-class PizzaInfo(BaseModel):
-    id: int
-    name: str
-    price: int
-
-    class Config:
-        from_attributes = True
 
 class OrderCreate(BaseModel):
     pizza_id: int
@@ -15,7 +9,7 @@ class OrderCreate(BaseModel):
 class OrderResponse(BaseModel):
     id: int
     quantity: int
-    pizza: PizzaInfo
+    pizza: PizzaResponse
 
     class Config:
         from_attributes = True

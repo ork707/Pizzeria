@@ -10,9 +10,11 @@ rm pizzeria.db
   {
   "username": "alice",
   "password": "secret123"
-}
+  }
 
 {
   "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsImV4cCI6MTc4MjkxMzU1OH0.XgAf-dzA9RJWHk-SUMbLn2Quyu40sV-vyUkdxIk2la4",
   "token_type": "bearer"
 }
+
+ "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGljZSIsImV4cCI6MTc4Mjk5ODc5OX0.F4uUbWh8kPOWvORymGRvIs2EtpskSM7syyZ8CwLZqiA"
